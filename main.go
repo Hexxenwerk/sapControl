@@ -16,7 +16,7 @@ type args struct {
 
 type system map[string]struct {
 	Host, User string
-	Inst       []int
+	Inst       []string
 	Prod       bool
 }
 
@@ -41,7 +41,7 @@ func execSAPControl(flags args, systems system) {
 		if systems[sid].Prod && !*flags.prod {
 			continue
 		}
-		arg := fmt.Sprintf("-host %s -user %s -nr %d -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst, *flags.cmd)
+		arg := fmt.Sprintf("-host %s -user %s -nr %d -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst[0], *flags.cmd)
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg).CombinedOutput()
 		if err != nil {
 			log.Fatal("Error: Failed executing OS command: ", err)
@@ -53,10 +53,10 @@ func execSAPControl(flags args, systems system) {
 func getSystems(flags args) (systems system) {
 	file, err := ioutil.ReadFile(*flags.file)
 	if err != nil {
-		log.Fatal("Error: Failed reading file:", err)
+		log.Fatal("Error: Failed reading file: ", err)
 	}
 	if err := json.Unmarshal(file, &systems); err != nil {
-		log.Fatal("Error: Failed to unmarshal JSON:", err)
+		log.Fatal("Error: Failed to unmarshal JSON: ", err)
 	}
 	return systems
 }
