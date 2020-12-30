@@ -2,6 +2,10 @@
   "S11": {
     "host": "example-host1",
     "user": "s11adm",
+    "inst": [
+      "00",
+      "01"
+    ],
     "prod": false
   },
   "S12:": {
@@ -12,6 +16,10 @@
   "P11": {
     "host": "example-host3",
     "user": "p11adm",
+    "inst": [
+      "00",
+      "01"
+    ],
     "prod": true
   }
 }
