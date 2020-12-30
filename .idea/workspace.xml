@@ -56,7 +56,9 @@
     <MESSAGE value="Implement configurable SAP instance number" />
     <MESSAGE value="latest" />
     <MESSAGE value="Correct type mismatch" />
-    <option name="LAST_COMMIT_MESSAGE" value="Correct type mismatch" />
+    <MESSAGE value="Add missing flag parse" />
+    <MESSAGE value="Latest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Latest" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
