@@ -55,7 +55,8 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Implement configurable SAP instance number" />
     <MESSAGE value="latest" />
-    <option name="LAST_COMMIT_MESSAGE" value="latest" />
+    <MESSAGE value="Correct type mismatch" />
+    <option name="LAST_COMMIT_MESSAGE" value="Correct type mismatch" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
