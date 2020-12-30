@@ -53,7 +53,9 @@
     <MESSAGE value="Example configuration file" />
     <MESSAGE value="Extend example with SAP instance numbers" />
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Implement configurable SAP instance number" />
+    <MESSAGE value="latest" />
+    <option name="LAST_COMMIT_MESSAGE" value="latest" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
