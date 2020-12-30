@@ -16,6 +16,7 @@ type args struct {
 
 type system map[string]struct {
 	Host, User string
+	Inst       []int
 	Prod       bool
 }
 
@@ -40,7 +41,7 @@ func execSAPControl(flags args, systems system) {
 		if systems[sid].Prod && !*flags.prod {
 			continue
 		}
-		arg := fmt.Sprintf("-host %s -user %s -nr 0 -function %s", systems[sid].Host, systems[sid].User, *flags.cmd)
+		arg := fmt.Sprintf("-host %s -user %s -nr %d -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst, *flags.cmd)
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg).CombinedOutput()
 		if err != nil {
 			log.Fatal("Error: Failed executing OS command: ", err)
