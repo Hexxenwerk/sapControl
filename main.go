@@ -11,7 +11,7 @@ import (
 
 type args struct {
 	file, pass, cmd *string
-	prod            *bool
+	prod, debug     *bool
 }
 
 type system map[string]struct {
@@ -28,10 +28,11 @@ func main() {
 
 func getFlags() args {
 	flags := args{
-		cmd:  flag.String("cmd", "GetProcessList", "sapcontrol function"),
-		file: flag.String("file", "config.json", "Config file"),
-		pass: flag.String("pass", "", "Password for OS user <sid>adm"),
-		prod: flag.Bool("prod", false, "Set to include production systems"),
+		cmd:   flag.String("cmd", "GetProcessList", "sapcontrol function"),
+		file:  flag.String("file", "config.json", "Config file"),
+		pass:  flag.String("pass", "", "Password for OS user <sid>adm"),
+		prod:  flag.Bool("prod", false, "Set to include production systems"),
+		debug: flag.Bool("debug", false, "Set to generate additional output"),
 	}
 	flag.Parse()
 	return flags
@@ -43,6 +44,9 @@ func execSAPControl(flags args, systems system) {
 			continue
 		}
 		arg := fmt.Sprintf("-host %s -user %s -nr %d -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst[0], *flags.cmd)
+		if *flags.debug {
+			fmt.Println("/usr/sap/hostctrl/exe/sapcontrol", arg)
+		}
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg).CombinedOutput()
 		fmt.Printf("%s", out)
 		if err != nil {
