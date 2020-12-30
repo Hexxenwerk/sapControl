@@ -43,7 +43,7 @@ func execSAPControl(flags args, systems system) {
 		if systems[sid].Prod && !*flags.prod {
 			continue
 		}
-		arg := fmt.Sprintf("-host %s -user %s -nr %s -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst[0], *flags.cmd)
+		arg := fmt.Sprintf("-host %s -user %s '%s' -nr %s -function %s", systems[sid].Host, systems[sid].User, *flags.pass, systems[sid].Inst[0], *flags.cmd)
 		if *flags.debug {
 			fmt.Println("/usr/sap/hostctrl/exe/sapcontrol", arg)
 		}
