@@ -1,0 +1,17 @@
+{
+  "S11": {
+    "host": "example-host1",
+    "user": "s11adm",
+    "prod": false
+  },
+  "S12:": {
+    "host": "example-host2",
+    "user": "s12adm",
+    "prod": false
+  },
+  "P11": {
+    "host": "example-host3",
+    "user": "p11adm",
+    "prod": true
+  }
+}
