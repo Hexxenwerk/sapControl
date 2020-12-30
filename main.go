@@ -44,10 +44,10 @@ func execSAPControl(flags args, systems system) {
 		}
 		arg := fmt.Sprintf("-host %s -user %s -nr %d -function %s", systems[sid].Host, systems[sid].User, systems[sid].Inst[0], *flags.cmd)
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg).CombinedOutput()
+		fmt.Printf("%s", out)
 		if err != nil {
 			log.Fatal("Error: Failed executing OS command: ", err)
 		}
-		fmt.Printf("%s", out)
 	}
 }
 
