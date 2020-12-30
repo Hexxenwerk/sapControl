@@ -33,6 +33,7 @@ func getFlags() args {
 		pass: flag.String("pass", "", "Password for OS user <sid>adm"),
 		prod: flag.Bool("prod", false, "Set to include production systems"),
 	}
+	flag.Parse()
 	return flags
 }
 
