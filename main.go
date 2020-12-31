@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os/exec"
+	"strings"
 )
 
 type args struct {
@@ -43,13 +44,11 @@ func execSAPControl(flags args, systems system) {
 		if systems[sid].Prod && !*flags.prod {
 			continue
 		}
-		//arg := fmt.Sprintf("-host %s -user %s %s -nr %s -function %s", systems[sid].Host, systems[sid].User, *flags.pass, systems[sid].Inst[0], *flags.cmd)
 		arg := []string{"-host", systems[sid].Host, "-user", systems[sid].User, *flags.pass, "-nr", systems[sid].Inst[0], "-function", *flags.cmd}
 		if *flags.debug {
-			fmt.Println("/usr/sap/hostctrl/exe/sapcontrol", arg)
+			fmt.Println("/usr/sap/hostctrl/exe/sapcontrol", strings.Join(arg, " "))
 		}
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg...).CombinedOutput()
-		//out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg).CombinedOutput()
 		fmt.Printf("%s", out)
 		if err != nil {
 			log.Fatal("Error: Failed executing OS command: ", err)
@@ -58,11 +57,11 @@ func execSAPControl(flags args, systems system) {
 }
 
 func getSystems(flags args) (systems system) {
-	file, err := ioutil.ReadFile(*flags.file)
+	data, err := ioutil.ReadFile(*flags.file)
 	if err != nil {
 		log.Fatal("Error: Failed reading file: ", err)
 	}
-	if err := json.Unmarshal(file, &systems); err != nil {
+	if err := json.Unmarshal(data, &systems); err != nil {
 		log.Fatal("Error: Failed to unmarshal JSON: ", err)
 	}
 	return systems
