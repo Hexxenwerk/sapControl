@@ -45,7 +45,7 @@ func execSAPControl(flags args, systems system) {
 			fmt.Println("Skipping production system:", sid)
 			continue
 		}
-		fmt.Printf("%s: Executing function %s", sid, *flags.cmd)
+		fmt.Printf("%s: Executing function %s\n", sid, *flags.cmd)
 		arg := []string{"-host", systems[sid].Host, "-user", systems[sid].User, *flags.pass, "-nr", systems[sid].Inst[0], "-function", *flags.cmd}
 		if *flags.debug {
 			fmt.Println("/usr/sap/hostctrl/exe/sapcontrol", strings.Join(arg, " "))
