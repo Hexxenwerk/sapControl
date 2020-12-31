@@ -53,7 +53,12 @@ func execSAPControl(flags args, systems system) {
 		out, err := exec.Command("/usr/sap/hostctrl/exe/sapcontrol", arg...).CombinedOutput()
 		fmt.Printf("%s", out)
 		if err != nil {
-			log.Fatal("Error: Failed executing OS command: ", err)
+			switch err.Error() {
+			case "2", "3", "4":
+				continue
+			default:
+				log.Fatal("Error: Failed executing OS command: ", err)
+			}
 		}
 	}
 }
